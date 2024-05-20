@@ -4,6 +4,7 @@ import Select from "react-select";
 import Signupform from "../../components/shared/signupform";
 function Signup() {
 
+  //this is change the employee option and change the form 
   const [Nameplaceholder, setPlaceholder] = useState("Employee");
 
   //change the opion values

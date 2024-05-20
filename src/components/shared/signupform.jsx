@@ -12,7 +12,7 @@ function Signupform({ Nameplaceholder,initialValues,hanldeSumbit }) {
       >
         {() => (
           <Form className="flex flex-col gap-4">
-            <>
+            
               <Field
                 type="text"
                 name={Nameplaceholder === 'Employee' ? 'Name' : 'Companyname'}
@@ -52,7 +52,7 @@ function Signupform({ Nameplaceholder,initialValues,hanldeSumbit }) {
                 <FaArrowRightLong />
               </button>
               <h1 className="text-blue-400">Already have an account? Login</h1>
-            </>
+          
           </Form>
         )}
       </Formik>
