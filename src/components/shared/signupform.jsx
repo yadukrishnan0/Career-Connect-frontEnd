@@ -2,6 +2,7 @@ import React from 'react'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignupValidation } from '../../utilities/SIgnupYup';
+import { Link } from 'react-router-dom';
 function Signupform({ Nameplaceholder,initialValues,hanldeSumbit }) {
   return (
     <>
@@ -51,7 +52,10 @@ function Signupform({ Nameplaceholder,initialValues,hanldeSumbit }) {
                 Create Account
                 <FaArrowRightLong />
               </button>
+              <Link to={'/login'}> 
+            
               <h1 className="text-blue-400">Already have an account? Login</h1>
+             </Link>
           
           </Form>
         )}
