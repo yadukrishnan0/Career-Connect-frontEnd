@@ -34,6 +34,8 @@ function Signup() {
   }
 
   return (
+    <>
+    
     <div className="w-full h-screen flex justify-center items-center ">
       <div className="flex shadow-md h-[500px]">
         <div className="right_div flex-1 flex flex-col justify-center items-center gap-3">
@@ -57,6 +59,11 @@ function Signup() {
         </div>
       </div>
     </div>
+
+
+
+    </>
+
   );
 }
 
