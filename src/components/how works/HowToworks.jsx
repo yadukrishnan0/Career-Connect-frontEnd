@@ -1,5 +1,5 @@
 import React from "react";
-import worldImg from "../../assets/domain-transfer.svg";
+import worldImg from "../../assets/4901198.jpg";
 import imge2 from "../../assets/analysis.svg";
 
 function HowToworks() {

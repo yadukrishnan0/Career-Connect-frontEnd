@@ -1,29 +1,17 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import UserHome from "./pages/userPages/UserHome";
-import Signup from "./pages/userPages/Signup";
-import SignupOtp from "./pages/userPages/SignupOtp";
-import CompanyRegisterInfo from "./pages/userPages/CompanyRegisterInfo";
-import UserLogin from "./pages/userPages/UserLogin";
-import Userlayout from "./Layout/Userlayout";
+import UserRouter from "./routers/UserRouter";
+import AdminRouter from "./routers/AdminRouter";
+import CompanyRouter from "./routers/CompanyRouter";
 function App() {
   return (
     <>
       <BrowserRouter>
-
         <Routes>
-        
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/otp" element={<SignupOtp />} />
-          <Route path='/login' element={<UserLogin/>}/>
-          <Route path="/companyregisterInfo" element={<CompanyRegisterInfo />}/>
-          <Route path="/" element={<Userlayout/>}>
-             <Route path="/" element={<UserHome />} />
-        </Route>
+          <Route path="/*" element={<UserRouter />} />
+          <Route path="/admin/*" element={<AdminRouter />} />
+          <Route path="/company/*" element={<CompanyRouter/>} />
         </Routes>
-
-    
-
       </BrowserRouter>
     </>
   );

@@ -8,7 +8,7 @@ function Header() {
     <>
       <div className="w-full bg-customGray flex justify-between items-center h-16 p-4">
         <div>
-          <h1 className="font-medium text-[1.1rem]">Carrer-Connect</h1>
+          <h1 className="font-medium text-[1.1rem]">Career-Connect</h1>
         </div>
         <div className=" sm:flex gap-14 hidden ">
           <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue ">
