@@ -3,7 +3,7 @@ import React from 'react';
 const PostJob = () => {
   return (
 
-    <div className="  p-8 bg-white  rounded-md ">
+    <div className="mx-auto  p-8 max-w-4xl bg-white  rounded-md ">
       <h1 className="text-2xl font-bold mb-6">Post a Job</h1>
       <form>
         {/* Job Title */}
@@ -13,6 +13,7 @@ const PostJob = () => {
             type="text"
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             placeholder="Add job title, role, vacancies etc"
+            name='jobTitle'
           />
         </div>
 
@@ -23,16 +24,15 @@ const PostJob = () => {
             type="text"
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             placeholder="Job keyword, tags etc"
+            name='tags'
           />
         </div>
 
         {/* Job Role */}
         <div className="mb-4">
           <label className="block text-gray-700 mb-2">Job Role</label>
-          <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-            <option value="">Select...</option>
-            {/* Add job roles options here */}
-          </select>
+          <input className="w-full px-3 py-2 border border-gray-300 rounded-md " name='jobrole' placeholder='job role'/>
+          
         </div>
 
         {/* Salary */}
@@ -43,7 +43,7 @@ const PostJob = () => {
               type="number"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               placeholder="Minimum salary"
-            />
+            name='minisalary'/>
           </div>
           <div className="flex-1">
             <label className="block text-gray-700 mb-2">Max Salary</label>
@@ -51,14 +51,13 @@ const PostJob = () => {
               type="number"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               placeholder="Maximum salary"
-            />
+            name='maxsalary'/>
           </div>
           <div className="flex-1">
             <label className="block text-gray-700 mb-2">Salary Type</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-              <option value="">Select...</option>
-              {/* Add salary type options here */}
-            </select>
+            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder='salary'
+            name='salaryType'/>
+              
           </div>
         </div>
 
@@ -67,29 +66,32 @@ const PostJob = () => {
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-gray-700 mb-2">Education</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-              <option value="">Select...</option>
-              {/* Add education options here */}
-            </select>
+            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" name='education'/>
+              
           </div>
           <div>
             <label className="block text-gray-700 mb-2">Experience</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-              <option value="">Select...</option>
-              {/* Add experience options here */}
-            </select>
+            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" name='experience'/>
+              
           </div>
           <div>
             <label className="block text-gray-700 mb-2">Job Type</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-              <option value="">Select...</option>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-md" name='jobType'>
+              <option value='default' hidden>Select...</option>
+              <option value="Full-time">Full-time</option>
+              <option value="Contract">Contract</option>
+              <option value="Part-time">Part-time</option>
+              <option value="internship">internship</option>
               {/* Add job type options here */}
             </select>
           </div>
           <div>
-            <label className="block text-gray-700 mb-2">Job Level</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-              <option value="">Select...</option>
+            <label className="block text-gray-700 mb-2">Works-Space-Type</label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-md" name='Works_Space_Type'>
+              <option value=""  hidden>Select...</option>
+              <option value="On-site">On-site</option>
+              <option value="Hybird">Hybird</option>
+              <option value="Remote">Remote</option>
               {/* Add job level options here */}
             </select>
           </div>
@@ -99,6 +101,7 @@ const PostJob = () => {
               type="number"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               placeholder="Number of vacancies"
+              name='Vacancies'
             />
           </div>
           <div>
@@ -106,7 +109,7 @@ const PostJob = () => {
             <input
               type="date"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            />
+            name='date'/>
           </div>
         </div>
 
