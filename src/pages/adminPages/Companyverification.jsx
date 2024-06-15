@@ -3,6 +3,7 @@ import axiosInstance from "../../instence/axiosinstance";
 import CompanyList from "../../components/companylist/CompanyList";
 import DetailsModal from "../../components/DetailsModal/DetailsModal";
 import { GiConsoleController } from "react-icons/gi";
+import Shimmer from "../../components/shared/Shimmer";
 function Companyverification() {
   const [companyData, setCompanyData] = useState([]);
   const[companyId,setCompanyId] =useState('')
@@ -34,7 +35,9 @@ function Companyverification() {
   
   }
 
-  return (
+    return companyData.length == 0 ?(<div className="flex flex-col gap-4"> <Shimmer/> <Shimmer/><Shimmer/><Shimmer/><Shimmer/></div>):
+  (
+    
     <div className="flex flex-col gap-7">
       {companyData.map((val, index) => (
         <CompanyList company={val} key={index}   handleclick={handleclick} />
@@ -46,7 +49,7 @@ function Companyverification() {
 
 
     </div>
-  );
+  )
 }
 
 export default Companyverification;

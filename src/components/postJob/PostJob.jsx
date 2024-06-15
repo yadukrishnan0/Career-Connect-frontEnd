@@ -66,12 +66,12 @@ const PostJob = () => {
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-gray-700 mb-2">Education</label>
-            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" name='education'/>
+            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" name='education' placeholder='Education'/>
               
           </div>
           <div>
             <label className="block text-gray-700 mb-2">Experience</label>
-            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" name='experience'/>
+            <input className="w-full px-3 py-2 border border-gray-300 rounded-md" name='experience' placeholder='Experience'/>
               
           </div>
           <div>
