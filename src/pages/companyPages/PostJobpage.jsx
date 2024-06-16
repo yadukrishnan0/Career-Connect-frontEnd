@@ -1,5 +1,7 @@
 import React from 'react'
 import PostJob from '../../components/postJob/PostJob'
+import axiosInstance from "../../instence/axiosinstance";
+import axios from 'axios';
 function PostJobpage() {
 const initialValues = {
   jobTitle: '',
@@ -15,10 +17,21 @@ const initialValues = {
   Vacancies: '',
   date: '',
 };
-const handleSubmit =(values, { setSubmitting, resetForm })=>{
-console.log(values);
-console.log('hello')
-setSubmitting(false);
+const handleSubmit = async(values, { setSubmitting, resetForm })=>{
+const jobData =values;
+const token = localStorage.getItem('jwt');
+console.log(token)
+try{
+
+const response = await axiosInstance.post('/company/jobpost', jobData, {
+  headers: {
+    'Authorization': `Bearer ${token}`  // Add the token here
+  }
+});
+}catch(err){
+  console.log(err);
+}
+setSubmitting(false)
 }
 
 
