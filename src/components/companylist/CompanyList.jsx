@@ -1,7 +1,5 @@
 import React from 'react';
-import microsoftLgo from '../../assets/microsoft.webp';
-import axiosInstance from '../../instence/axiosinstance';
-
+import VerifiedIcon from '@mui/icons-material/Verified';
 const CompanyList= ({company, handleclick}) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between p-4 py-7 border rounded-sm shadow-sm space-y-4 md:space-y-0">
@@ -25,10 +23,13 @@ const CompanyList= ({company, handleclick}) => {
           </div>
         </div>
       </div>
+      {company.companyId.adminVerification ? <VerifiedIcon className='text-green-600'/> :
       <button className="w-full md:w-auto px-6 py-2 bg-customBlue text-white font-roboto font-medium text-[.9rem] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
       onClick={()=>handleclick(company._id)}>
         VIEW DOCUMENTS
       </button>
+}
+
     </div>
   );
 };

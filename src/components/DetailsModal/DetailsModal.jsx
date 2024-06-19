@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { MdClear } from "react-icons/md";
-function DetailsModal({companyDetails,handleclick}) {
+function DetailsModal({companyDetails,handleclick,companyVerification}) {
 
   return (
     <>
@@ -168,34 +168,24 @@ function DetailsModal({companyDetails,handleclick}) {
                     />
                   </span>
                 </div>
-                <div className="flex mt-5 mb-7 justify-between">
-                  {/* <span className="flex w-[33.5%] flex-col gap-2">
-                                            <label htmlFor="" className="text-[.75rem] font-inter opacity-90">City</label>
-                                            <input
+                <div className="flex mt-5 mb-7 gap-4 items-center justify-center">
+                  <span className="flex w-[33.5%] flex-col gap-2 ">
+                                            {/* <label htmlFor="" className="text-[.75rem] font-inter opacity-90">City</label> */}
+                                            <button
                                                 spellCheck={false}
-                                                className="h-[2.4rem] w-full shadow-md border outline-none px-4 text-[.9rem]"
-                                                type="text"
-                                                name="city"
-                                            />
-                                        </span> */}
-                  {/* <span className="flex w-[35.5%] flex-col gap-2">
-                                            <label htmlFor="" className="text-[.75rem] font-inter opacity-90">Landmark</label>
-                                            <input
+                                                className="h-[2.4rem] w-full shadow-md border outline-none px-4 text-[.9rem] bg-green-700 text-white"
+                                                onClick={()=>{companyVerification(companyDetails[0]?.companyId?._id,companyDetails[0]?._id)}}
+                                            > Accept </button>
+                                        </span>
+                  <span className="flex w-[35.5%] flex-col gap-2">
+                                            {/* <label htmlFor="" className="text-[.75rem] font-inter opacity-90">Landmark</label> */}
+                                            <button
                                                 spellCheck={false}
-                                                className="h-[2.4rem] w-full shadow-md border outline-none px-4 text-[.9rem]"
-                                                type="text"
-                                                name="landmark"
-                                            />
-                                        </span> */}
-                  {/* <span className="flex w-[26%] flex-col gap-2">
-                                            <label htmlFor="" className="text-[.75rem] font-inter opacity-90">House No</label>
-                                            <input
-                                                spellCheck={false}
-                                                className="h-[2.4rem] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full shadow-md border outline-none px-4 text-[.9rem]"
-                                                type="number"
-                                                name="houseno"
-                                            />
-                                        </span> */}
+                                                className="h-[2.4rem] w-full shadow-md border outline-none px-4 text-[.9rem] bg-red-500 text-white"
+                                              
+                                            >Decline</button>
+                                        </span>
+                
                 </div>
               </div>
             </div>

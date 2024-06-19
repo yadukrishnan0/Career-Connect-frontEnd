@@ -2,7 +2,9 @@ import React from 'react'
 import PostJob from '../../components/postJob/PostJob'
 import axiosInstance from "../../instence/axiosinstance";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function PostJobpage() {
+  const navigate =useNavigate()
 const initialValues = {
   jobTitle: '',
   tags: '',
@@ -20,7 +22,7 @@ const initialValues = {
 const handleSubmit = async(values, { setSubmitting, resetForm })=>{
 const jobData =values;
 const token = localStorage.getItem('jwt');
-console.log(token)
+
 try{
 
 const response = await axiosInstance.post('/company/jobpost', jobData, {
@@ -28,6 +30,9 @@ const response = await axiosInstance.post('/company/jobpost', jobData, {
     'Authorization': `Bearer ${token}`  // Add the token here
   }
 });
+if(response.status ==201){
+  resetForm(true)
+}
 }catch(err){
   console.log(err);
 }

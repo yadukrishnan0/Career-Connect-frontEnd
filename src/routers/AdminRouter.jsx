@@ -14,8 +14,10 @@ const AdminRouter = () => {
       <Route path='/login' element={<AdminLogin/>}/>
 
       <Route path='/' element={<AdminLayout/>}>
+
       <Route path='/home' element={<AdminHome/>}/>
       <Route path='/companyverification' element={<Companyverification/>}/>
+      
       </Route>
 
      

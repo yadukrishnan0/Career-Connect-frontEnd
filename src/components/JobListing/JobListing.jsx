@@ -1,24 +1,24 @@
 import React from 'react';
 import microsoftLgo from '../../assets/microsoft.webp';
 
-const JobListing = () => {
+const JobListing = ({jobs}) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between p-4 py-7 border rounded-sm shadow-sm space-y-4 md:space-y-0">
       <div className="flex items-center">
         <div className="flex-shrink-0">
           <img
-            src={microsoftLgo}
+            src={`http://localhost:8086/assets/${jobs?.companyDocuments?.companylogo}`}
             alt="Company Logo"
             className="h-10 w-10"
           />
         </div>
 
         <div className="ml-4">
-          <h3 className="text-lg font-medium">Software Engineer</h3>
+          <h3 className="text-lg font-medium">{jobs.jobTitle}</h3>
           <div className="flex items-center text-sm text-gray-500">
-            <span>China</span>
+            <span>{jobs?.companyId?.Companyname}</span>
             <span className="mx-2">•</span>
-            <span>$50K-$60K</span>
+            <span>{jobs.minisalary}-{jobs?.maxsalary}</span>
             <span className="mx-2">•</span>
             <span>4 Days Remaining</span>
           </div>

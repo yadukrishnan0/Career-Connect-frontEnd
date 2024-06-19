@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BoyPic from "../../assets/Illustration.png";
 import Button from "../../components/shared/Button";
 import Cards from "../../components/Cards/Cards";
@@ -10,7 +10,26 @@ import { MdOutlineVerified } from "react-icons/md";
 import arrowImg from "../../assets/arrows.png";
 import ReverseArrow from "../../assets/arrow-reverse.png";
 import JobListing from "../../components/JobListing/JobListing";
+import axiosInstance from "../../instence/axiosinstance";
 function UserHome() {
+
+const[jobs,setJobs]=useState([])
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get('/');
+      const data = response?.data?.jobData;
+      setJobs(data);
+      // console.log(data);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+  };
+  fetchData();
+}, []);
+
+
+
   return (
     <>
       <div className="main w-full   flex flex-col md:flex-row justify-evenly items-center bg-customGray gap-5 ">
@@ -24,7 +43,7 @@ function UserHome() {
             </h1>
           </div>
           <h1 className="md:w-[34rem] w-[15rem] text-gray-500">
-            Welcome to GoGig, where you can find exciting job chances in India's
+            Welcome to careerConnect, where you can find exciting job chances in India's
             growing gig economy. Discover jobs that let you work when you want,
             learn new things, and earn money on your own schedule. Join our
             community of motivated people and begin creating your future today
@@ -112,11 +131,9 @@ function UserHome() {
           </button>
         </div>
         <div className="flex  w-full flex-col gap-3">
-          <JobListing />
-          <JobListing />
-          <JobListing />
-          <JobListing />
-          <JobListing />
+        {jobs.map((val) => (
+        <JobListing key={val._id} jobs={val}/> // Pass the job data as props if needed
+      ))}
           
         </div>
       </div>
