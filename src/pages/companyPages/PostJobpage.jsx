@@ -18,6 +18,7 @@ const initialValues = {
   Works_Space_Type: '',
   Vacancies: '',
   date: '',
+  requirements: [{ requirement: '' }]
 };
 const handleSubmit = async(values, { setSubmitting, resetForm })=>{
 const jobData =values;

@@ -23,6 +23,7 @@
     "react-router-dom": "^6.23.1",
     "react-select": "^5.8.0",
     "react-selector": "^0.0.5",
+    "react-spinners": "^0.13.8",
     "yup": "^1.4.0"
   },
   "devDependencies": {

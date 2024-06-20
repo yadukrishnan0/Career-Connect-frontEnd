@@ -8,7 +8,7 @@ function Companyverification() {
   const [companyData, setCompanyData] = useState([]);
   const[companyId,setCompanyId] =useState('')
   const[companyDetails,setCompanyDetails] =useState([])
-  const [Verified, setVerified] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,14 +37,17 @@ function Companyverification() {
 
   const companyVerification =async(id,companyIdd)=>{
   try{
-    console.log(companyIdd)
+    setLoading(true)
     const response = await axiosInstance.put(`/admin/companyverification?id=${id}`)
+    
 if(response.status ==200){
   setCompanyData(companyData.map(company =>
     company._id === companyIdd ? { ...company, companyId
       : { ...company.companyId, adminVerification: true} } : company
   ));
+  setLoading(false)
   setCompanyId('')
+  
 }
   }catch(error){
 
@@ -60,7 +63,7 @@ if(response.status ==200){
       ))}
 
       <div className={companyId ? 'flex' :'hidden'}>
-      <DetailsModal companyDetails={companyDetails} handleclick={handleclick}  companyVerification={companyVerification}/>
+      <DetailsModal companyDetails={companyDetails} handleclick={handleclick}  companyVerification={companyVerification} loading={loading}/>
       </div>
 
 

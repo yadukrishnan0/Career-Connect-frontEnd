@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
+import ScaleLoader from 'react-spinners/ScaleLoader'; 
 import { MdClear } from "react-icons/md";
-function DetailsModal({companyDetails,handleclick,companyVerification}) {
-
+function DetailsModal({companyDetails,handleclick,companyVerification,loading}) {
   return (
     <>
       <div className="fixed ins inset-0 flex justify-center items-center">
@@ -91,7 +91,8 @@ function DetailsModal({companyDetails,handleclick,companyVerification}) {
             </div>
             <div className="w-full h-auto">
               <div className="h-full py-2 px-12 w-full">
-                <div className="flex mt-5 justify-between">
+
+                <div className="flex mt-5 justify-between relative">
                   <span className="flex w-[49.5%] flex-col gap-2">
                     <label
                       htmlFor=""
@@ -106,6 +107,7 @@ function DetailsModal({companyDetails,handleclick,companyVerification}) {
                       name="occupation"
                       value={companyDetails[0]?.Registration_Number}
                     />
+                    
                   </span>
                   <span className="flex w-[49.5%] flex-col gap-2">
                     <label
@@ -120,7 +122,13 @@ function DetailsModal({companyDetails,handleclick,companyVerification}) {
                       value={companyDetails[0]?.Sector}
                     />
                   </span>
+
+            {loading ? <ScaleLoader color="#3688d6" height={45} width={8} className="absolute left-[50%]" /> :''}     
+   
+                
+
                 </div>
+               
                 <div className="flex mt-5 justify-between">
                   <span className="flex w-[41.5%] flex-col gap-2">
                     <label

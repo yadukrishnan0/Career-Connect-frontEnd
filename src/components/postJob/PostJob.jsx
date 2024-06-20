@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { PostjobValidation } from '../../utilities/PostJobYup';
 
 const PostJob = ({ initialValues, onSubmit }) => {
@@ -8,9 +8,9 @@ const PostJob = ({ initialValues, onSubmit }) => {
       initialValues={initialValues}
       validationSchema={PostjobValidation}
       onSubmit={onSubmit}
-      enableReinitialize={true}
+      enableReinitialize={true} // Allows initialValues to be updated
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <div className="mx-auto p-8 max-w-4xl bg-white rounded-md">
           <h1 className="text-2xl font-bold mb-6">Post a Job</h1>
           <Form>
@@ -153,12 +153,52 @@ const PostJob = ({ initialValues, onSubmit }) => {
               </div>
             </div>
 
+            {/* Dynamic Requirements Field */}
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2">Requirements</label>
+              <FieldArray name="requirements">
+                {({ push, remove }) => (
+                  <div>
+                    {values.requirements.map((requirement, index) => (
+                      <div key={index} className="flex items-center mb-2">
+                        <Field
+                          name={`requirements.${index}.requirement`}
+                          placeholder="Requirement"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => remove(index)}
+                          className="ml-2 px-2 py-1 text-white bg-red-500 rounded"
+                        >
+                          Remove
+                        </button>
+                        <ErrorMessage
+                          name={`requirements.${index}.requirement`}
+                          component="small"
+                          className="text-red-400 ml-2"
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => push({ requirement: '' })}
+                      className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-700"
+                    >
+                      Add Requirement
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
+            </div>
+
+            {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-md"
               disabled={isSubmitting}
             >
-              Post Job
+              {isSubmitting ? 'Posting...' : 'Post Job'}
             </button>
           </Form>
         </div>

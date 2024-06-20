@@ -8,7 +8,7 @@ import CompanyRegisterInfo from "../pages/userPages/CompanyRegisterInfo";
 import UserLogin from "../pages/userPages/UserLogin";
 import Userlayout from "../Layout/Userlayout";
 import Error from "../pages/sharedPages/Error";
-
+import JobdetailsPage from "../pages/userPages/JobdetailsPage";
 const UserRouter = () => {
   return (
     <Routes>
@@ -19,6 +19,7 @@ const UserRouter = () => {
       <Route path="/" element={<Userlayout />}>
         <Route path="/" element={<UserHome />} />
         <Route path="/*" element={<Error />} />
+        <Route path="/jobdetail" element={<JobdetailsPage/>} />
       </Route>
     </Routes>
   );
