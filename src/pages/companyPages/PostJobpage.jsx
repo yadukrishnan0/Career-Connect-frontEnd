@@ -3,6 +3,7 @@ import PostJob from '../../components/postJob/PostJob'
 import axiosInstance from "../../instence/axiosinstance";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 function PostJobpage() {
   const navigate =useNavigate()
 const initialValues = {
@@ -18,7 +19,8 @@ const initialValues = {
   Works_Space_Type: '',
   Vacancies: '',
   date: '',
-  requirements: [{ requirement: '' }]
+  requirements: [{ requirement: '' }],
+  skill:[{skill:''}]
 };
 const handleSubmit = async(values, { setSubmitting, resetForm })=>{
 const jobData =values;

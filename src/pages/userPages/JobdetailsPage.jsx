@@ -9,7 +9,7 @@ function JobdetailsPage() {
     const [searchParams] = useSearchParams();
     const id = searchParams.get('id');
 
-   const [jobdata,setJobdata] =useState({})
+   const [jobdata,setJobdata] =useState(null)
    const navigate =useNavigate()
     useEffect(()=>{
         const fetchData = async()=>{
@@ -28,7 +28,7 @@ function JobdetailsPage() {
     },[])
   return (
    <>
-   <JobDetails/>
+   {jobdata ? <JobDetails jobdata={jobdata}/>: <div>no job data</div>}
    </>
   )
 }

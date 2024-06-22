@@ -4,7 +4,7 @@ import JobDetails from "../../components/jobDetails/JobDetails";
 function AdminHome() {
   return (
     <>
-   <JobDetails/>
+   <><div>melcow</div></>
     </>
   );
 }

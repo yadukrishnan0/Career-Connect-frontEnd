@@ -68,8 +68,13 @@ function UserLogin() {
     } else {
       try {
         const response = await axiosInstance.post("/login", formData);
-        const role = response?.data?.role; //checking role
-        const token = response?.data?.token; // jwt token
+        console.log(response)
+        const role = response?.data?.role || null //checking role
+        const token = response?.data?.token;// jwt token
+        const otp = response?.data?.otp || true
+if(!otp){
+   return navigate('/otp')
+  }
         if (response.status == 200) {
           localStorage.setItem("jwt", token); //if user login success the the jwt token will be store to localstorage
           role === "company" ? navigate("/company/overview") : navigate("/");

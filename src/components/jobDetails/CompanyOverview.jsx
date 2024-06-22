@@ -1,9 +1,9 @@
 import React from 'react';
 import { CiClock2 } from "react-icons/ci";
-const JobOverview = ({jobdata}) => {
+const CompanyOverview = ({jobdata}) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-xl font-bold mb-4">Job Overview</h2>
+      <h2 className="text-xl font-bold mb-4">Company Overview</h2>
       <div className="grid grid-cols-2 gap-4 text-gray-600">
         <div className="flex items-center">
           <i className="fas fa-calendar-alt text-blue-500 mr-2"></i>
@@ -58,4 +58,4 @@ const JobOverview = ({jobdata}) => {
   );
 }
 
-export default JobOverview;
+export default CompanyOverview;

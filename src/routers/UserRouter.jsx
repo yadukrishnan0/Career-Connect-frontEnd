@@ -9,6 +9,7 @@ import UserLogin from "../pages/userPages/UserLogin";
 import Userlayout from "../Layout/Userlayout";
 import Error from "../pages/sharedPages/Error";
 import JobdetailsPage from "../pages/userPages/JobdetailsPage";
+import FilterJob from "../pages/userPages/FilterJob";
 const UserRouter = () => {
   return (
     <Routes>
@@ -20,6 +21,7 @@ const UserRouter = () => {
         <Route path="/" element={<UserHome />} />
         <Route path="/*" element={<Error />} />
         <Route path="/jobdetail" element={<JobdetailsPage/>} />
+        <Route path="/filterjob" element={<FilterJob/>} />
       </Route>
     </Routes>
   );

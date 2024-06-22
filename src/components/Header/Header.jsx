@@ -1,9 +1,16 @@
-import React from "react";
-import Button from "../shared/Button";
+import React, { useState } from "react";
 import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
+import FilterComponent from "../filter/FilterComponent";
+import Button from "../shared/Button";
 function Header() {
+  const[filtermodal,setFiltermodal]=useState(false);
+
+  const handleClick=()=>{
+    filtermodal ? setFiltermodal(false) : setFiltermodal(true);
+    console.log('hello')
+  }
   return (
     <>
       <div className="w-full bg-customGray flex justify-between items-center h-16 p-4">
@@ -26,15 +33,16 @@ function Header() {
         </div>
 
         <div className="hidden sm:flex">
-          <Button childern="Sign in" />
+          <Button label="Sign in"  />
         </div>
         <div className="flex sm:hidden">
           <CiMenuBurger />
         </div>
       </div>
 
-      <div className=" flex justify-around p-2 ">
-        <div className="text-white sm:flex hidden">jj</div>
+      <div className=" flex justify-around p-2 border-b-2">
+
+      <div className="-translate-x-36"><Button label={'Filter'} handleClick={handleClick}/></div>
         <div className="flex  border border-gray-300 rounded-lg shadow-sm p-2 md:w-1/4">
           <input
             type="text"
@@ -51,6 +59,11 @@ function Header() {
           <FaRegUser />
         </div>
       </div>
+
+      <div className={filtermodal ? 'flex' : 'hidden'}>
+  <FilterComponent />
+</div>
+
     </>
   );
 }

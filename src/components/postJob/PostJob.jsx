@@ -192,6 +192,49 @@ const PostJob = ({ initialValues, onSubmit }) => {
               </FieldArray>
             </div>
 
+
+
+             {/* Dynamic skill Field */}
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2">Skill</label>
+              <FieldArray name="skill">
+                {({ push, remove }) => (
+                  <div>
+                    {values.skill.map((skill, index) => (
+                      <div key={index} className="flex items-center mb-2">
+                        <Field
+                          name={`skill.${index}.skill`}
+                          placeholder="skills"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => remove(index)}
+                          className="ml-2 px-2 py-1 text-white bg-red-500 rounded"
+                        >
+                          Remove
+                        </button>
+                        <ErrorMessage
+                          name={`skill.${index}.skill`}
+                          component="small"
+                          className="text-red-400 ml-2"
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => push({skill: '' })}
+                      className="px-4 py-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-700"
+                    >
+                      Add Skills
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
+            </div>
+
+
+
             {/* Submit Button */}
             <button
               type="submit"

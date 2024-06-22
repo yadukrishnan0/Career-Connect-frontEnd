@@ -1,30 +1,34 @@
 import React from 'react';
 import Microsoft from '../../assets/microsoft.webp'
 import JobOverview from './JobOverview';
-const JobDetails = () => {
+import CompanyOverview from './CompanyOverview';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+const JobDetails = ({jobdata}) => {
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         {/* Header Section */}
         <div className="p-6 flex justify-between items-center border-b">
           <div className="flex items-center">
-            <img src={Microsoft} alt="Company Logo" className="w-16 h-16 rounded-full mr-4"/>
+            <img src={`http://localhost:8086/assets/${jobdata?.companyDocuments?.companylogo}`} alt="Company Logo" className="w-16 h-16 rounded-full mr-4"/>
             <div>
               <h1 className="text-2xl font-bold">
-                Senior UX Designer 
-                <span className="text-red-500 ml-2">Featured</span>
+                {jobdata?.jobTitle}
+                
               </h1>
-              <p className="text-blue-500">Full Time</p>
+              <p className="text-blue-500">{jobdata?.jobType}</p>
               <div className="text-gray-600">
-                <a href="https://instagram.com" className="block">https://instagram.com</a>
-                <p><a href="tel:+14065550120">(406) 555-0120</a></p>
-                <p><a href="mailto:career@instagram.com">career@instagram.com</a></p>
+                
+                <p><a href="tel:+14065550120">{jobdata?.companyId?.phone}</a></p>
+                <p><a href="mailto:career@instagram.com">{jobdata?.companyId?.email}</a></p>
               </div>
             </div>
           </div>
-          <div className="text-right">
+          
+          <div className="text-right flex gap-4 items-center ">
+          <BookmarkIcon className='text-gray-400 '/>  
             <button className="bg-blue-500 text-white px-4 py-2 rounded">Apply Now</button>
-            <p className="text-gray-600 mt-2">Job expire in: <span className="text-red-500">June 30, 2021</span></p>
+            {/* <p className="text-gray-600 mt-2">Job expire in: <span className="text-red-500">June 30, 2021</span></p> */}
           </div>
         </div>
         {/* Main Content */}
@@ -40,24 +44,30 @@ const JobDetails = () => {
             </p>
             <h2 className="text-xl font-bold mb-4">Responsibilities</h2>
             <ul className="list-disc list-inside text-gray-600 mb-4">
-              <li>Quisque semper gravida est et consectetur.</li>
-              <li>Curabitur blandit lorem velit, vitae pretium leo placerat eget.</li>
-              <li>Morbi mattis in ipsum ac tempus.</li>
-              <li>Curabitur eu vehicula libero. Vestibulum sed purus ullamcorper, lobortis lectus nec.</li>
-              <li>Vulputate turpis. Quisque ante odio, iaculis a porttitor sit amet.</li>
-              <li>Lobortis vel lectus. Nulla at risus ut diam.</li>
-              <li>Commodo feugiat. Nullam laoreet, diam placerat dapibus tincidunt.</li>
-              <li>Odio metus posuere lorem, id condimentum erat velit nec neque.</li>
-              <li>Dui sodales ut. Curabitur tempus augue.</li>
+  {jobdata.requirements.map((val)=>(
+
+
+                <li>{val.requirement}</li>
+              ))}
             </ul>
             
+            <h2 className="text-xl font-bold mb-4">Skills</h2>
+            <ul className="list-disc list-inside text-gray-600 mb-4">
+  {jobdata.skill.map((val)=>(
+
+
+                <li>{val.skill}</li>
+              ))}
+            </ul>
+
           </div>
           {/* Job Overview */}
-          <div>
+          <div className='flex flex-col gap-6'>
           
-            <JobOverview/>
-            
+            <JobOverview jobdata={jobdata}/>
+           <CompanyOverview jobdata={jobdata}/> 
           </div>
+          
         </div>
       </div>
     </div>

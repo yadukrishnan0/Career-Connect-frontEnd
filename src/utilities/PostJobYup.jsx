@@ -13,9 +13,18 @@ export const PostjobValidation = Yup.object().shape({
   Works_Space_Type: Yup.string().required('Work-Space-Type is required'),
   Vacancies: Yup.number().required('Vacancies are required').positive('Must be positive'),
   date: Yup.date().required('Expiration Date is required'),
+
   requirements: Yup.array().of(
     Yup.object().shape({
       requirement: Yup.string().required('Requirement is required'),
     })
   ).required('Must have requirements').min(1, 'Minimum of 1 requirement'),
+
+
+  skill: Yup.array().of(
+    Yup.object().shape({
+      skill: Yup.string().required('skill is required'),
+    })
+  ).required('Must have skill').min(1, 'Minimum of 1 skillx'),
+  
 });

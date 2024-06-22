@@ -11,9 +11,12 @@ import arrowImg from "../../assets/arrows.png";
 import ReverseArrow from "../../assets/arrow-reverse.png";
 import JobListing from "../../components/JobListing/JobListing";
 import axiosInstance from "../../instence/axiosinstance";
+import { useNavigate } from "react-router-dom";
 function UserHome() {
 
 const[jobs,setJobs]=useState([])
+const navigate = useNavigate()
+
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -126,7 +129,8 @@ useEffect(() => {
       <div className=" h-auto w-[80%] mx-auto flex flex-col items-center justify-center">
         <div className="flex w-full my-10 h-auto justify-between items-center">
           <h1 className="text-[2rem] font-bold">Featured jobs</h1>
-          <button className="px-6 py-2  text-customBlue rounded-md hove border-2 :bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button className="px-6 py-2  text-customBlue rounded-md hove border-2 :bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onClick={()=>{navigate('/filterjob')}}>
             View All
           </button>
         </div>
