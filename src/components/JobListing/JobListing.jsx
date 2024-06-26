@@ -3,7 +3,6 @@ import microsoftLgo from '../../assets/microsoft.webp';
 import { useNavigate } from 'react-router-dom';
 
 const JobListing = ({jobs}) => {
-
   const navigate =useNavigate()
   return (
     <div className="flex flex-col md:flex-row items-center max-w-[95rem] w-full flex-1 mx-auto  justify-between p-4 py-7 border rounded-sm shadow-sm space-y-4 md:space-y-0">
@@ -12,7 +11,7 @@ const JobListing = ({jobs}) => {
           <img
             src={`http://localhost:8086/assets/${jobs?.companyDocuments?.companylogo}`}
             alt="Company Logo"
-            className="h-10 w-10"
+            className="h-10 w-10 object-cover"
           />
         </div>
 

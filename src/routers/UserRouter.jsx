@@ -10,6 +10,9 @@ import Userlayout from "../Layout/Userlayout";
 import Error from "../pages/sharedPages/Error";
 import JobdetailsPage from "../pages/userPages/JobdetailsPage";
 import FilterJob from "../pages/userPages/FilterJob";
+import ComplteProfile from "../pages/userPages/ComplteProfile";
+import PrivateRoute from "./PrivateRoute";
+
 const UserRouter = () => {
   return (
     <Routes>
@@ -20,8 +23,16 @@ const UserRouter = () => {
       <Route path="/" element={<Userlayout />}>
         <Route path="/" element={<UserHome />} />
         <Route path="/*" element={<Error />} />
-        <Route path="/jobdetail" element={<JobdetailsPage/>} />
-        <Route path="/filterjob" element={<FilterJob/>} />
+        <Route path="/jobdetail" element={<JobdetailsPage />} />
+        <Route path="/filterjob" element={<FilterJob />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <ComplteProfile />
+            </PrivateRoute>
+          }
+        />
       </Route>
     </Routes>
   );

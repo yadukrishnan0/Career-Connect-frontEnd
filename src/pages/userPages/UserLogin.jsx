@@ -76,7 +76,7 @@ if(!otp){
    return navigate('/otp')
   }
         if (response.status == 200) {
-          localStorage.setItem("jwt", token); //if user login success the the jwt token will be store to localstorage
+          role === "company" ? localStorage.setItem("jwt", token):localStorage.setItem("user",token); //if user login success the the jwt token will be store to localstorage
           role === "company" ? navigate("/company/overview") : navigate("/");
         }
       } catch (err) {

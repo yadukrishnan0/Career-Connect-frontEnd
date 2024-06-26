@@ -4,11 +4,12 @@ import JobListing from "../../components/JobListing/JobListing";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../instence/axiosinstance";
 import ScrollToTop from "../../utilities/ScrollToTop";
-import { FaBars } from "react-icons/fa";
 
 function FilterJob() {
   ScrollToTop();
   const [jobs, setJobs] = useState([]);
+  const[filtermodal,setFiltermodal]=useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,6 +24,7 @@ function FilterJob() {
     fetchData();
   }, []);
 
+
   return (
     <>
     <div className=" w-full flex justify-center">
@@ -31,9 +33,13 @@ function FilterJob() {
           <JobListing key={val._id} jobs={val} /> // Pass the job data as props if needed
         ))}
       </div>
-      
-    </div>
-{/* <div className="hidden md:flex"><FilterComponent /></div> */}
+
+  <div className={filtermodal ? 'flex' : 'hidden'}>
+  <FilterComponent />
+</div>
+
+</div>
+
 </>
   );
 }

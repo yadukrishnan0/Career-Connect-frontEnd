@@ -10,7 +10,7 @@ const JobDetails = ({jobdata}) => {
         {/* Header Section */}
         <div className="p-6 flex justify-between items-center border-b">
           <div className="flex items-center">
-            <img src={`http://localhost:8086/assets/${jobdata?.companyDocuments?.companylogo}`} alt="Company Logo" className="w-16 h-16 rounded-full mr-4"/>
+            <img src={`http://localhost:8086/assets/${jobdata?.companyDocuments?.companylogo}`} alt="Company Logo" className="w-16 h-16 rounded-full mr-4 object-cover"/>
             <div>
               <h1 className="text-2xl font-bold">
                 {jobdata?.jobTitle}

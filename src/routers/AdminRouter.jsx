@@ -18,7 +18,7 @@ const AdminRouter = () => {
       <Route path='/home' element={<AdminHome/>}/>
       <Route path='/companyverification' element={<Companyverification/>}/>
       
-      </Route>
+      </Route>  
 
      
     
