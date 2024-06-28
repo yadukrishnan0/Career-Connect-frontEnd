@@ -4,7 +4,7 @@ import JobCard from "../../components/Cards/JobCard";
 
 function CompanyOverview() {
   const [activeCardIndex, setActiveCardIndex] = useState(null);
-  const array =[1,2,3,4,5,6,7,8,9,10,11]
+  const array =[1]
   const handleClick =(index)=>{
     setActiveCardIndex(activeCardIndex === index ? null : index);
   }

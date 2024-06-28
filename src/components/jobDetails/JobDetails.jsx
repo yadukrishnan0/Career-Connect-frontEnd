@@ -3,7 +3,7 @@ import Microsoft from '../../assets/microsoft.webp'
 import JobOverview from './JobOverview';
 import CompanyOverview from './CompanyOverview';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-const JobDetails = ({jobdata}) => {
+const JobDetails = ({jobdata,applyClick}) => {
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -27,7 +27,7 @@ const JobDetails = ({jobdata}) => {
           
           <div className="text-right flex gap-4 items-center ">
           <BookmarkIcon className='text-gray-400 '/>  
-            <button className="bg-blue-500 text-white px-4 py-2 rounded">Apply Now</button>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={()=>{applyClick(jobdata._id)}}>Apply Now</button>
             {/* <p className="text-gray-600 mt-2">Job expire in: <span className="text-red-500">June 30, 2021</span></p> */}
           </div>
         </div>
@@ -44,19 +44,19 @@ const JobDetails = ({jobdata}) => {
             </p>
             <h2 className="text-xl font-bold mb-4">Responsibilities</h2>
             <ul className="list-disc list-inside text-gray-600 mb-4">
-  {jobdata.requirements.map((val)=>(
+  {jobdata.requirements.map((val,index )=>(
 
 
-                <li>{val.requirement}</li>
+                <li key={index}>{val.requirement}</li>
               ))}
             </ul>
             
             <h2 className="text-xl font-bold mb-4">Skills</h2>
             <ul className="list-disc list-inside text-gray-600 mb-4">
-  {jobdata.skill.map((val)=>(
+  {jobdata.skill.map((val,index)=>(
 
 
-                <li>{val.skill}</li>
+<li key={index}>{val.skill}</li>
               ))}
             </ul>
 

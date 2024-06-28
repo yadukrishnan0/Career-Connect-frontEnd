@@ -74,3 +74,25 @@ export const ProfileValidation = Yup.object().shape({
     })
   ),
 });
+
+export const ApplicationValidation = Yup.object().shape({
+  education: Yup.string().required('Education is required'),
+  experience: Yup.string().required('Experience is required'),
+  company: Yup.string().required('Company is required'),
+  location: Yup.string().required('Location is required'),
+  skill: Yup.array().of(
+    Yup.object().shape({
+      skill: Yup.string().required('Skill is required'),
+    })
+  ),
+  language: Yup.array().of(
+    Yup.object().shape({
+      language: Yup.string().required('Language is required'),
+    })
+  ),
+  resume: Yup.mixed()
+    .required('Resume is required')
+    .test('fileType', 'Only PDF files are allowed', (value) => {
+      return value && value.type === 'application/pdf';
+    }),
+});

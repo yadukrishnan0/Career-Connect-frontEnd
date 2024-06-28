@@ -40,8 +40,7 @@ function CompanyRegisterInfo() {
   newFormData.append('district',formData.district )
   newFormData.append('pincode',formData.pincode)
   newFormData.append('logo',formData.logo)
-  newFormData.append('Sector',formData.Sector)
-  console.log(newFormData)
+  newFormData.append('Sector',formData.Sector);
   try{
      const response = await axiosInstance.post('/companydocuments',newFormData,{
       headers:{

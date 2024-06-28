@@ -12,6 +12,7 @@ import JobdetailsPage from "../pages/userPages/JobdetailsPage";
 import FilterJob from "../pages/userPages/FilterJob";
 import ComplteProfile from "../pages/userPages/ComplteProfile";
 import PrivateRoute from "./PrivateRoute";
+import ApplicationPage from "../pages/userPages/ApplicationPage";
 
 const UserRouter = () => {
   return (
@@ -30,6 +31,15 @@ const UserRouter = () => {
           element={
             <PrivateRoute>
               <ComplteProfile />
+            </PrivateRoute>
+          }
+        />
+
+<Route
+          path="/application"
+          element={
+            <PrivateRoute>
+              <ApplicationPage />
             </PrivateRoute>
           }
         />

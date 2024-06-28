@@ -52,7 +52,7 @@ function Header() {
 
         <div className="sm:flex  hidden items-center justify-center gap-3">
           <IoNotificationsOutline />
-          <FaRegUser onClick={()=>{navigate('/profile')}}/>
+          <FaRegUser onClick={()=>{navigate('/profile')}} className="cursor-pointer"/>
         </div>
       </div>
 

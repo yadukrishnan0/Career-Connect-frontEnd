@@ -16,6 +16,7 @@ function JobdetailsPage() {
             try{
              const response = await axiosInstance.get(`/jobdetail?id=${id}`)
              const job =response?.data?.jobsObject;
+        
              setJobdata(job)
              
             }catch(err){
@@ -26,9 +27,14 @@ function JobdetailsPage() {
         }
         fetchData()
     },[])
+
+    const applyClick =(jobid)=>{
+       navigate(`/application?jobId=${jobid}`)
+    }
+
   return (
    <>
-   {jobdata ? <JobDetails jobdata={jobdata}/>: <div>no job data</div>}
+   {jobdata ? <JobDetails jobdata={jobdata} applyClick={applyClick} />: <div>no job data</div>}
    </>
   )
 }

@@ -68,7 +68,7 @@ function UserLogin() {
     } else {
       try {
         const response = await axiosInstance.post("/login", formData);
-        console.log(response)
+
         const role = response?.data?.role || null //checking role
         const token = response?.data?.token;// jwt token
         const otp = response?.data?.otp || true
