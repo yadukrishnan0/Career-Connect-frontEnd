@@ -10,12 +10,12 @@ function ApplicationPage() {
   const jobId = searchParams.get('jobId');
 
   const initialValues = {
-    education: "f",
-    experience: "0-1",
-    company: "fff",
-    location: "ff",
-    skill: [{ skill: "f" }],
-    language: [{ language: "ff" }],
+    education: "",
+    experience: "",
+    company: "",
+    location: "",
+    skill: [{ skill: "" }],
+    language: [{ language: "" }],
     
   };
 
@@ -37,7 +37,9 @@ function ApplicationPage() {
     'Authorization': `Bearer ${token}`
   }}
 )
-   
+   if(response.status ==201){
+
+   }
   };
   
 
