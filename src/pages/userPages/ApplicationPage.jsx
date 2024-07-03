@@ -38,7 +38,7 @@ function ApplicationPage() {
   }}
 )
    if(response.status ==201){
-
+    navigate('/completed')
    }
   };
   

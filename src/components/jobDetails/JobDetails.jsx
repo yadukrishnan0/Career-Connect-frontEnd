@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Microsoft from '../../assets/microsoft.webp'
 import JobOverview from './JobOverview';
 import CompanyOverview from './CompanyOverview';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-const JobDetails = ({jobdata,applyClick}) => {
+const JobDetails = ({jobdata,applyClick,btndisble}) => {
+
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -27,7 +28,11 @@ const JobDetails = ({jobdata,applyClick}) => {
           
           <div className="text-right flex gap-4 items-center ">
           <BookmarkIcon className='text-gray-400 '/>  
-            <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={()=>{applyClick(jobdata._id)}}>Apply Now</button>
+
+          {btndisble ? <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={()=>{applyClick(jobdata._id)}}>Apply Now</button>:
+            <button className="bg-gray-300 text-white px-4 py-2 rounded">Applyed</button>
+            }
+
             {/* <p className="text-gray-600 mt-2">Job expire in: <span className="text-red-500">June 30, 2021</span></p> */}
           </div>
         </div>

@@ -1,25 +1,26 @@
-import React from 'react';
-import axiosInstance from '../../instence/axiosinstance';
+import React from "react";
+import axiosInstance from "../../instence/axiosinstance";
 
 const ApplicationCard = ({ applicant }) => {
-  const { userId, position, experience, education, applyDate, resume } = applicant;
-  const { name, email, phone } = userId || {}; // Safeguard against undefined userId
+  const { userId, position, experience, education, applyDate, resume } =
+    applicant;
+  const { name, email, phone } = userId || {};
 
   const downloadCV = async () => {
     try {
-      const response = await axiosInstance.get(`/company/download?resume=${resume}`, {
-        responseType: 'blob',
+      const response = await axiosInstance.get(`/assets/${resume}`, {
+        responseType: 'blob', // Ensure the response is of type blob
       });
 
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', resume);
+      link.setAttribute("download", resume);
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link); // Clean up after download
+      document.body.removeChild(link);
     } catch (error) {
-      console.error('Download error:', error);
+      console.error("Error downloading the file", error);
     }
   };
 
@@ -37,10 +38,14 @@ const ApplicationCard = ({ applicant }) => {
       <div className="mt-4">
         <p className="text-sm">Experience: {experience} Years</p>
         <p className="text-sm">Education: {education}</p>
-        <p className="text-sm">Applied: {new Date(applyDate).toLocaleString()}</p>
+        <p className="text-sm">
+          Applied: {new Date(applyDate).toLocaleString()}
+        </p>
       </div>
       <div className="mt-4">
-        <button className="text-blue-500" onClick={downloadCV}>Download CV</button>
+        <button className="text-blue-500" onClick={downloadCV}>
+          Download CV
+        </button>
       </div>
     </div>
   );

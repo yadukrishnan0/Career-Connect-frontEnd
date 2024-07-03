@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-
 import UserHome from "../pages/userPages/UserHome";
 import Signup from "../pages/userPages/Signup";
 import SignupOtp from "../pages/userPages/SignupOtp";
@@ -13,7 +12,8 @@ import FilterJob from "../pages/userPages/FilterJob";
 import ComplteProfile from "../pages/userPages/ComplteProfile";
 import PrivateRoute from "./PrivateRoute";
 import ApplicationPage from "../pages/userPages/ApplicationPage";
-
+import Completejobapplication from "../pages/userPages/Completejobapplication";
+import Chat from "../pages/userPages/Chat";
 const UserRouter = () => {
   return (
     <Routes>
@@ -21,6 +21,7 @@ const UserRouter = () => {
       <Route path="/otp" element={<SignupOtp />} />
       <Route path="/login" element={<UserLogin />} />
       <Route path="/companyregisterInfo" element={<CompanyRegisterInfo />} />
+
       <Route path="/" element={<Userlayout />}>
         <Route path="/" element={<UserHome />} />
         <Route path="/*" element={<Error />} />
@@ -35,7 +36,7 @@ const UserRouter = () => {
           }
         />
 
-<Route
+        <Route
           path="/application"
           element={
             <PrivateRoute>
@@ -43,6 +44,17 @@ const UserRouter = () => {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/completed"
+          element={
+            <PrivateRoute>
+              <Completejobapplication />
+            </PrivateRoute>
+          }
+        />
+
+        <Route path="/chat" element={<Chat />} />
       </Route>
     </Routes>
   );
