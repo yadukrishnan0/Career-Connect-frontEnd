@@ -48,21 +48,22 @@ export const ProfileValidation = Yup.object().shape({
     .required("Education is required")
     .min(2, "Education is too short")
     .max(100, "Education is too long"),
-  experience: Yup.string()
-    .required("Experience is required")
-    .min(2, "Experience is too short")
-    .max(100, "Experience is too long"),
-  company: Yup.string()
-    .required("Company is required")
-    .min(2, "Company is too short")
-    .max(100, "Company is too long"),
+
+  institution: Yup.string()
+    .required("Institution is required")
+    .min(2, "Institution is too short")
+    .max(100, "Institution is too long"),
+
+    jobrole: Yup.string().required("jobrole is required")
+    .min(2, "job role is too short")
+    .max(100, "job is too long"),
+
+  experience: Yup.string(),
+  company: Yup.string(),
   dob: Yup.date()
     .required("Date of Birth is required")
     .max(new Date(), "Date of Birth cannot be in the future"),
-  location: Yup.string()
-    .required("Location is required")
-    .min(2, "Location is too short")
-    .max(100, "Location is too long"),
+  location: Yup.string(),
   skill: Yup.array().of(
     Yup.object().shape({
       skill: Yup.string().required("Skill is required"),
@@ -76,23 +77,23 @@ export const ProfileValidation = Yup.object().shape({
 });
 
 export const ApplicationValidation = Yup.object().shape({
-  education: Yup.string().required('Education is required'),
-  experience: Yup.string().required('Experience is required'),
-  company: Yup.string().required('Company is required'),
-  location: Yup.string().required('Location is required'),
+  education: Yup.string().required("Education is required"),
+  experience: Yup.string().required("Experience is required"),
+  company: Yup.string().required("Company is required"),
+  location: Yup.string().required("Location is required"),
   skill: Yup.array().of(
     Yup.object().shape({
-      skill: Yup.string().required('Skill is required'),
+      skill: Yup.string().required("Skill is required"),
     })
   ),
   language: Yup.array().of(
     Yup.object().shape({
-      language: Yup.string().required('Language is required'),
+      language: Yup.string().required("Language is required"),
     })
   ),
   resume: Yup.mixed()
-    .required('Resume is required')
-    .test('fileType', 'Only PDF files are allowed', (value) => {
-      return value && value.type === 'application/pdf';
+    .required("Resume is required")
+    .test("fileType", "Only PDF files are allowed", (value) => {
+      return value && value.type === "application/pdf";
     }),
 });

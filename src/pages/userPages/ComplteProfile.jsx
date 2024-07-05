@@ -3,17 +3,21 @@ import Profilefrom from "../../components/compltePofile/Profilefrom";
 import axiosInstance from "../../instence/axiosinstance";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Userprofile from "./Userprofile";
+import { Email } from "@mui/icons-material";
 function ComplteProfile() {
   const [profileData, setProfileData] = useState("");
+  const [userdata,setUserdata]=useState('')
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState({
     name: "",
     education: "",
+    institution:'',
     experience: "",
     company: "",
     dob: "",
     location: "",
+    jobrole:"",
     skill: [{ skill: "" }],
     language: [{ language: "" }],
   });
@@ -30,8 +34,10 @@ function ComplteProfile() {
         if (response.status == 200) {
           const user = response?.data?.exisitUser;
           const userprofile = response?.data?.profiledata;
-          setInitialValues({ ...initialValues, name: user.name });
+          setInitialValues({ ...initialValues, name: user.name ,
+          });
           setProfileData(userprofile);
+          setUserdata(user);
         }
       } catch (err) {
         console.log(err);
@@ -43,6 +49,7 @@ function ComplteProfile() {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const token = localStorage.getItem("user");
     const Data = values;
+    console.log( Data);
     try {
       const response = await axiosInstance.post("/profile", Data, {
         headers: {
@@ -61,7 +68,7 @@ function ComplteProfile() {
     <>
       <div className="overflow-y-auto w-full h-full  ">
         {profileData ? (
-          <div>welcome profile</div>
+          < Userprofile userdata={userdata} profileData={profileData} />
         ) : (
           <Profilefrom initialValues={initialValues} onSubmit={handleSubmit} />
         )}

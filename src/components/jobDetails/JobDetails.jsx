@@ -30,7 +30,7 @@ const JobDetails = ({jobdata,applyClick,btndisble}) => {
           <BookmarkIcon className='text-gray-400 '/>  
 
           {btndisble ? <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={()=>{applyClick(jobdata._id)}}>Apply Now</button>:
-            <button className="bg-gray-300 text-white px-4 py-2 rounded">Applyed</button>
+            <button className="bg-gray-300 text-white px-4 py-2 rounded">Applied</button>
             }
 
             {/* <p className="text-gray-600 mt-2">Job expire in: <span className="text-red-500">June 30, 2021</span></p> */}

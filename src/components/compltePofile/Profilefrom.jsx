@@ -38,6 +38,19 @@ const Profilefrom = ({ initialValues, onSubmit }) => {
                 />
                 <ErrorMessage name="education" component="small" className="text-red-400" />
               </div>
+
+
+              <div>
+                <label className="block text-gray-700 mb-2">Institution</label>
+                <Field
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  name="institution"
+                  placeholder="Institution"
+                />
+                <ErrorMessage name="institution" component="small" className="text-red-400" />
+              </div>
+
+
               <div>
                 <label className="block text-gray-700 mb-2">Experience</label>
                 <Field
@@ -47,6 +60,7 @@ const Profilefrom = ({ initialValues, onSubmit }) => {
                 />
                 <ErrorMessage name="experience" component="small" className="text-red-400" />
               </div>
+
               <div>
                 <label className="block text-gray-700 mb-2">Company</label>
                 <Field
@@ -57,15 +71,20 @@ const Profilefrom = ({ initialValues, onSubmit }) => {
                 />
                 <ErrorMessage name="company" component="small" className="text-red-400" />
               </div>
+
+
               <div>
-                <label className="block text-gray-700 mb-2">Date of Birth</label>
+                <label className="block text-gray-700 mb-2">Jobrole</label>
                 <Field
-                  type="date"
+                  type="text"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  name="dob"
+                  placeholder="Jobrole"
+                  name="jobrole"
                 />
-                <ErrorMessage name="dob" component="small" className="text-red-400" />
+                <ErrorMessage name="jobrole" component="small" className="text-red-400" />
               </div>
+         
+
               <div>
                 <label className="block text-gray-700 mb-2">Location</label>
                 <Field
@@ -76,6 +95,20 @@ const Profilefrom = ({ initialValues, onSubmit }) => {
                 />
                 <ErrorMessage name="location" component="small" className="text-red-400" />
               </div>
+
+
+              <div>
+                <label className="block text-gray-700 mb-2">Date of Birth</label>
+                <Field
+                  type="date"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  name="dob"
+                />
+                <ErrorMessage name="dob" component="small" className="text-red-400" />
+              </div>
+
+              
+
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 mb-2">Skill</label>
