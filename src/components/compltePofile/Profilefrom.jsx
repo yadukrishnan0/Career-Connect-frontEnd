@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { ProfileValidation } from '../../utilities/PostJobYup';
 
 const Profilefrom = ({ initialValues, onSubmit }) => {
+
+
   return (
     <Formik
       initialValues={initialValues}
@@ -84,6 +86,30 @@ const Profilefrom = ({ initialValues, onSubmit }) => {
                 <ErrorMessage name="jobrole" component="small" className="text-red-400" />
               </div>
          
+
+
+
+              <div>
+                <label className="block text-gray-700 mb-2">Start date</label>
+                <Field
+                  type="date"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  name="startdate"
+                />
+                <ErrorMessage name="startdate" component="small" className="text-red-400" />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 mb-2">enddate</label>
+                <Field
+                  type="date"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  name="enddate"
+                />
+                <ErrorMessage name="enddate" component="small" className="text-red-400" />
+              </div>
+              
+              
 
               <div>
                 <label className="block text-gray-700 mb-2">Location</label>
@@ -189,7 +215,7 @@ const Profilefrom = ({ initialValues, onSubmit }) => {
               className="w-full bg-blue-500 text-white py-2 rounded-md"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Posting...' : 'Post Job'}
+              {isSubmitting ? 'updatig...' : 'Update profile'}
             </button>
           </Form>
         </div>

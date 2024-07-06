@@ -54,15 +54,20 @@ export const ProfileValidation = Yup.object().shape({
     .min(2, "Institution is too short")
     .max(100, "Institution is too long"),
 
-    jobrole: Yup.string().required("jobrole is required")
+  jobrole: Yup.string()
+    .required("jobrole is required")
     .min(2, "job role is too short")
     .max(100, "job is too long"),
 
   experience: Yup.string(),
   company: Yup.string(),
+  startdate: Yup.date(),
+  enddate: Yup.date(),
+
   dob: Yup.date()
     .required("Date of Birth is required")
     .max(new Date(), "Date of Birth cannot be in the future"),
+
   location: Yup.string(),
   skill: Yup.array().of(
     Yup.object().shape({

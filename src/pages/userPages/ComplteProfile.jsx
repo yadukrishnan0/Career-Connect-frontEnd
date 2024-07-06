@@ -5,24 +5,30 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Userprofile from "./Userprofile";
 import { Email } from "@mui/icons-material";
+import ScrollToTop from "../../utilities/ScrollToTop";
 function ComplteProfile() {
   const [profileData, setProfileData] = useState("");
-  const [userdata,setUserdata]=useState('')
+  const [profileExist, setProfileExist] = useState(false);
+  const [userdata, setUserdata] = useState("");
   const navigate = useNavigate();
+
   const [initialValues, setInitialValues] = useState({
     name: "",
     education: "",
-    institution:'',
+    institution: "",
     experience: "",
     company: "",
     dob: "",
     location: "",
-    jobrole:"",
+    jobrole: "",
+    startdate:"",
+    enddate:"",
     skill: [{ skill: "" }],
     language: [{ language: "" }],
   });
 
   useEffect(() => {
+    
     const fetchData = async () => {
       const token = localStorage.getItem("user");
       try {
@@ -34,30 +40,33 @@ function ComplteProfile() {
         if (response.status == 200) {
           const user = response?.data?.exisitUser;
           const userprofile = response?.data?.profiledata;
-          setInitialValues({ ...initialValues, name: user.name ,
-          });
+          setInitialValues({ ...initialValues, name: user.name });
           setProfileData(userprofile);
           setUserdata(user);
+          setProfileExist(true);
         }
       } catch (err) {
-        console.log(err);
+        setProfileExist(false);
       }
     };
+
     fetchData();
-  }, []);
+  });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const token = localStorage.getItem("user");
     const Data = values;
-    console.log( Data);
+
     try {
       const response = await axiosInstance.post("/profile", Data, {
         headers: {
           Authorization: `Bearer ${token}`, // Add the token here
         },
       });
-      if (response.status == 201) {
-        setProfileData(Data);
+      if (response.status == 200) {
+        setProfileData(response.data.profileDatas);
+        setUserdata(response.data.exisitUser);
+        setProfileExist(true);
       }
     } catch (err) {
       console.log(err);
@@ -67,8 +76,8 @@ function ComplteProfile() {
   return (
     <>
       <div className="overflow-y-auto w-full h-full  ">
-        {profileData ? (
-          < Userprofile userdata={userdata} profileData={profileData} />
+        {profileExist ? (
+          <Userprofile userdata={userdata} profileData={profileData} />
         ) : (
           <Profilefrom initialValues={initialValues} onSubmit={handleSubmit} />
         )}

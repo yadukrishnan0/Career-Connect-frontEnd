@@ -56,7 +56,7 @@ const UserRouter = () => {
         />
 
         <Route path="/chat" element={<Chat />} /> 
-        <Route path="/userprofile" element={<How/>}/>
+        {/* <Route path="/userprofile" element={<How/>}/> */}
       </Route>
     </Routes>
   );

@@ -4,11 +4,17 @@ import { IoMdClose } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import axiosInstance from "../../instence/axiosinstance";
 import { Construction } from "@mui/icons-material";
+import { CiCircleMinus } from "react-icons/ci";
+
+
+
 const Userprofile = ({ userdata, profileData }) => {
-  const [skills, setSkills] = useState(profileData.skill);
-  const [newSkill, setNewSkill] = useState();
+  const [skills, setSkills] = useState(profileData.skill); //data base skill
+  const [newSkill, setNewSkill] = useState(); // new skills add
   const [visible, setVisible] = useState(false);
   const [errMsg, setErrmsg] = useState("");
+
+  //delete skill and update skill using same api
   const addSkill = async () => {
     const token = localStorage.getItem("user");
 
@@ -42,6 +48,27 @@ const Userprofile = ({ userdata, profileData }) => {
         }, 2000);
       }
     }
+  };
+  // deleted skill
+  const deleteskill = async (skill) => {
+    try {
+      const token = localStorage.getItem("user");
+      const response = await axiosInstance.post(
+        `/updateskill?skill=${skill}`,
+        { skill: newSkill },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status == 200) {
+        const filterskill = skills.filter((val) => {
+          return val.skill != skill;
+        });
+        setSkills(filterskill);
+      }
+    } catch (err) {}
   };
 
   return (
@@ -171,7 +198,9 @@ const Userprofile = ({ userdata, profileData }) => {
           {profileData.experience.map((val, index) => (
             <div key={index}>
               <h3 className="font-semibold">{val.company}</h3>
-              <p className="text-sm text-gray-600">Mern STACK DEVELOPER</p>
+              <p className="text-sm text-gray-600">{val.jobrole.toUpperCase()}</p>
+              <p className="text-sm text-gray-600">Experience :{val.experience}</p>
+              <p className="text-sm text-gray-600">    {new Date(val.startdate).toLocaleDateString()}-{new Date(val.enddate).toLocaleDateString()}</p>
             </div>
           ))}
         </div>
@@ -180,11 +209,15 @@ const Userprofile = ({ userdata, profileData }) => {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-gray-700">Skills</h2>
             <button className="text-gray-400 hover:text-gray-600">
-              <FaPlus
+           {  visible ? (<CiCircleMinus
                 onClick={() => {
                   visible ? setVisible(false) : setVisible(true);
                 }}
-              />
+              />):
+
+              (< FaPlus onClick={() => {
+                visible ? setVisible(false) : setVisible(true);
+              }}/>)}
             </button>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -195,7 +228,11 @@ const Userprofile = ({ userdata, profileData }) => {
               >
                 {skill.skill}
                 <button className="text-gray-400 hover:text-gray-600">
-                  <IoMdClose />
+                  <IoMdClose
+                    onClick={() => {
+                      deleteskill(skill.skill);
+                    }}
+                  />
                 </button>
               </span>
             ))}
@@ -222,6 +259,13 @@ const Userprofile = ({ userdata, profileData }) => {
           </div>
         </div>
       </div>
+
+
+      <div className="w-full bg-red-400 card">
+           
+      </div>
+
+
     </div>
   );
 };
