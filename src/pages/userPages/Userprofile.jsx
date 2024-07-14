@@ -6,33 +6,33 @@ import axiosInstance from "../../instence/axiosinstance";
 import { Construction } from "@mui/icons-material";
 import { CiCircleMinus } from "react-icons/ci";
 
-
-
 const Userprofile = ({ userdata, profileData }) => {
   const [skills, setSkills] = useState(profileData.skill); //data base skill
+  const [Dataexperience, setDataExperince] = useState(profileData.experience);
   const [newSkill, setNewSkill] = useState(); // new skills add
   const [visible, setVisible] = useState(false);
   const [errMsg, setErrmsg] = useState("");
+  const [expvisible, setExpvisible] = useState(false);
+  const [newExperince, setNewExperince] = useState({
+    company: "",
+    location: "",
+    experience: "",
+    jobrole: "",
+    startdate: "",
+    enddate: "",
+  });
 
   //delete skill and update skill using same api
   const addSkill = async () => {
-    const token = localStorage.getItem("user");
-
     if (!newSkill.trim()) {
       console.error("Skill cannot be empty");
       return;
     }
 
     try {
-      const response = await axiosInstance.post(
-        "/updateskill",
-        { skill: newSkill },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.post("/updateskill", {
+        skill: newSkill,
+      });
 
       if (response.status === 200) {
         setSkills([...skills, { skill: newSkill }]);
@@ -52,16 +52,9 @@ const Userprofile = ({ userdata, profileData }) => {
   // deleted skill
   const deleteskill = async (skill) => {
     try {
-      const token = localStorage.getItem("user");
-      const response = await axiosInstance.post(
-        `/updateskill?skill=${skill}`,
-        { skill: newSkill },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.post(`/updateskill?skill=${skill}`, {
+        skill: newSkill,
+      });
       if (response.status == 200) {
         const filterskill = skills.filter((val) => {
           return val.skill != skill;
@@ -71,6 +64,43 @@ const Userprofile = ({ userdata, profileData }) => {
     } catch (err) {}
   };
 
+  const handlechange = (e) => {
+    const { name, value } = e.target;
+    setNewExperince({
+      ...newExperince,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const { company, location, experience, jobrole, startdate, enddate } =
+      newExperince;
+    if (
+      !company.trim() ||
+      !location.trim() ||
+      !experience.trim() ||
+      !jobrole.trim() ||
+      !startdate.trim() ||
+      !enddate.trim()
+    ) {
+      setErrmsg("please fill the");
+      return setTimeout(() => {
+        setErrmsg("");
+      }, 2000);
+    }
+
+    try {
+      const response = await axiosInstance.post(
+        "/updateexperience",
+        newExperince
+      );
+
+      if (response.status == 200) {
+        setDataExperince([...Dataexperience, newExperince]);
+        setExpvisible(false);
+      }
+    } catch (err) {}
+  };
   return (
     <div className="max-w-4xl mx-auto bg-white  rounded-lg overflow-hidden">
       <div className="bg-white p-6 relative">
@@ -170,18 +200,12 @@ const Userprofile = ({ userdata, profileData }) => {
             <h2 className="text-xl font-semibold">Experince</h2>
             <div className="flex space-x-2">
               <button className="text-gray-500 hover:text-gray-700">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <FaPlus
+                  onClick={() => {
+                    setVisible(false);
+                    setExpvisible(true);
+                  }}
+                />
               </button>
               <button className="text-gray-500 hover:text-gray-700">
                 <svg
@@ -195,12 +219,20 @@ const Userprofile = ({ userdata, profileData }) => {
               </button>
             </div>
           </div>
-          {profileData.experience.map((val, index) => (
+          {Dataexperience.map((val, index) => (
             <div key={index}>
               <h3 className="font-semibold">{val.company}</h3>
-              <p className="text-sm text-gray-600">{val.jobrole.toUpperCase()}</p>
-              <p className="text-sm text-gray-600">Experience :{val.experience}</p>
-              <p className="text-sm text-gray-600">    {new Date(val.startdate).toLocaleDateString()}-{new Date(val.enddate).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-600">
+                {val.jobrole.toUpperCase()}
+              </p>
+              <p className="text-sm text-gray-600">
+                Experience :{val.experience}
+              </p>
+              <p className="text-sm text-gray-600">
+                {" "}
+                {new Date(val.startdate).toLocaleDateString()}-
+                {new Date(val.enddate).toLocaleDateString()}
+              </p>
             </div>
           ))}
         </div>
@@ -209,15 +241,19 @@ const Userprofile = ({ userdata, profileData }) => {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-gray-700">Skills</h2>
             <button className="text-gray-400 hover:text-gray-600">
-           {  visible ? (<CiCircleMinus
-                onClick={() => {
-                  visible ? setVisible(false) : setVisible(true);
-                }}
-              />):
-
-              (< FaPlus onClick={() => {
-                visible ? setVisible(false) : setVisible(true);
-              }}/>)}
+              {visible ? (
+                <CiCircleMinus
+                  onClick={() => {
+                    visible ? setVisible(false) : setVisible(true);
+                  }}
+                />
+              ) : (
+                <FaPlus
+                  onClick={() => {
+                    visible ? setVisible(false) : setVisible(true);
+                  }}
+                />
+              )}
             </button>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -260,12 +296,116 @@ const Userprofile = ({ userdata, profileData }) => {
         </div>
       </div>
 
+      <div
+        className={`w-full   bg-[#ffffffca]  h-screen inset-0 absolute  ${
+          expvisible ? "flex" : "hidden"
+        }  justify-center`}
+      >
+        <div className="w-1/3 bg-white shadow-md rounded-lg p-2  relative top-36 h-[550px] ">
+          <div className="mb-4">
+            <div className="flex justify-between">
+              <label className="block text-sm font-medium text-gray-700">
+                jobrole*
+              </label>
+              <IoMdClose
+                onClick={() => {
+                  setExpvisible(false);
+                }}
+              />
+            </div>
 
-      <div className="w-full bg-red-400 card">
-           
+            <input
+              type="text"
+              placeholder="jobrole"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              name="jobrole"
+              value={newExperince.jobrole}
+              onChange={handlechange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Company name*
+            </label>
+            <input
+              type="text"
+              placeholder="Ex: Microsoft"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              name="company"
+              value={newExperince.company}
+              onChange={handlechange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Location*
+            </label>
+            <input
+              type="text"
+              placeholder="Ex: London, United Kingdom"
+              name="location"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={newExperince.location}
+              onChange={handlechange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Experience*
+            </label>
+            <input
+              type="text"
+              placeholder="Ex: London, United Kingdom"
+              name="experience"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={newExperince.experience}
+              onChange={handlechange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Startdate*
+            </label>
+            <input
+              type="date"
+              placeholder="Ex: London, United Kingdom"
+              name="startdate"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={newExperince.startdate}
+              onChange={handlechange}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Enddate*
+            </label>
+            <input
+              type="date"
+              placeholder="Ex: London, United Kingdom"
+              name="enddate"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={newExperince.enddate}
+              onChange={handlechange}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            onClick={handleSubmit}
+          >
+            Save
+          </button>
+          <p className="text-red-600 w-full flex p-2 justify-center">
+            {errMsg}
+          </p>
+        </div>
       </div>
-
-
     </div>
   );
 };

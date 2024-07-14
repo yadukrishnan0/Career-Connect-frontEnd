@@ -36,11 +36,7 @@ function JobdetailsPage() {
     if (token) {
       const fetchMyjobs = async () => {
         try {
-          const response = await axiosInstance.get("/applyjob", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await axiosInstance.get("/applyjob");
           const applyjobsData = response.data.myjobData;
           setMyjobs(applyjobsData);
 

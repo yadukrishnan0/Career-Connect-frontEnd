@@ -32,11 +32,7 @@ function ComplteProfile() {
     const fetchData = async () => {
       const token = localStorage.getItem("user");
       try {
-        const response = await axiosInstance.get("/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Add the token here
-          },
-        });
+        const response = await axiosInstance.get("/profile");
         if (response.status == 200) {
           const user = response?.data?.exisitUser;
           const userprofile = response?.data?.profiledata;
@@ -51,7 +47,7 @@ function ComplteProfile() {
     };
 
     fetchData();
-  });
+  },[]);
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const token = localStorage.getItem("user");

@@ -22,7 +22,6 @@ function ApplicationPage() {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     values.jobId =jobId
     const formData = new FormData();
-   const token = localStorage.getItem('user')
     for (const key in values) {
       if (key === 'resume') {
         formData.append(key, values[key]);
@@ -33,8 +32,7 @@ function ApplicationPage() {
   const response = await axiosInstance.post('/application',formData,
     {
       headers:{
-    'Content-Type' :'multipart/form-data',
-    'Authorization': `Bearer ${token}`
+    'Content-Type' :'multipart/form-data'
   }}
 )
    if(response.status ==201){

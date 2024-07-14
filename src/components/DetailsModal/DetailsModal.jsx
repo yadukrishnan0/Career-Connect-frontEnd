@@ -4,7 +4,7 @@ import { MdClear } from "react-icons/md";
 function DetailsModal({companyDetails,handleclick,companyVerification,loading}) {
   return (
     <>
-      <div className="fixed ins inset-0 flex justify-center items-center">
+      <div className="fixed  inset-0 flex justify-center items-center">
         <div className="bg-white w-[80%] min-h-[90%] h-auto shadow-box rounded-md border-2 border-gray-400">
           <div className="w-full h-52 flex flex-col">
             <div className="w-full h-52 flex">
