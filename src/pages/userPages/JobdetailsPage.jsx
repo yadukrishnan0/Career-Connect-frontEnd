@@ -23,6 +23,7 @@ function JobdetailsPage() {
         const response = await axiosInstance.get(`/jobdetail?id=${id}`);
         const job = response?.data?.jobsObject;
         setJobdata(job);
+        console.log(job)
       } catch (err) {
         if (err.response) {
           navigate("/fdjf");

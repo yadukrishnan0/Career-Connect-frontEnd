@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import axiosInstance from "../../instence/axiosinstance";
 import { Construction } from "@mui/icons-material";
 import { CiCircleMinus } from "react-icons/ci";
-
+import ScrollToTop from "../../utilities/ScrollToTop";
 const Userprofile = ({ userdata, profileData }) => {
   const [skills, setSkills] = useState(profileData.skill); //data base skill
   const [Dataexperience, setDataExperince] = useState(profileData.experience);
@@ -20,7 +20,7 @@ const Userprofile = ({ userdata, profileData }) => {
     jobrole: "",
     startdate: "",
     enddate: "",
-  });
+  }); 
 
   //delete skill and update skill using same api
   const addSkill = async () => {

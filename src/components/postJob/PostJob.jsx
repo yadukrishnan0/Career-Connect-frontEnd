@@ -26,17 +26,7 @@ const PostJob = ({ initialValues, onSubmit }) => {
               <ErrorMessage name="jobTitle" component="small" className="text-red-400" />
             </div>
 
-            {/* Tags */}
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Tags</label>
-              <Field
-                type="text"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                placeholder="Job keyword, tags etc"
-                name="tags"
-              />
-              <ErrorMessage name="tags" component="small" className="text-red-400" />
-            </div>
+           
 
             {/* Job Role */}
             <div className="mb-4">
@@ -233,7 +223,17 @@ const PostJob = ({ initialValues, onSubmit }) => {
               </FieldArray>
             </div>
 
-
+ {/* Tags */}
+ <div className="mb-4">
+              <label className="block text-gray-700 mb-2">Discripation</label>
+              <Field
+                type="text"
+                className="w-full px-3 py-8 border border-gray-300 rounded-md"
+                placeholder="Job keyword, tags etc"
+                name="tags"
+              />
+              <ErrorMessage name="tags" component="small" className="text-red-400" />
+            </div>
 
             {/* Submit Button */}
             <button

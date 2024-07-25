@@ -6,7 +6,9 @@ import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 function Header() {
+
   const navigate =useNavigate()
+  
   return (
     <>
       <div className="w-full bg-customGray flex justify-between items-center h-16 p-4">

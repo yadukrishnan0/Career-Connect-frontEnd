@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BoyPic from "../../assets/Illustration.png";
 import Button from "../../components/shared/Button";
 import Cards from "../../components/Cards/Cards";
@@ -10,38 +10,33 @@ import { MdOutlineVerified } from "react-icons/md";
 import arrowImg from "../../assets/arrows.png";
 import ReverseArrow from "../../assets/arrow-reverse.png";
 import JobListing from "../../components/JobListing/JobListing";
-import axiosInstance from "../../instence/axiosinstance";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../Redux/Features/jobDataslice";
+
 function UserHome() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const jobs = useSelector((state) => state.jobdata.Jobdata);
+  const status = useSelector((state) => state.jobdata.status);
+  const error = useSelector((state) => state.jobdata.error);
 
-const[jobs,setJobs]=useState([])
-const navigate = useNavigate()
-
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axiosInstance.get('/');
-      const data = response?.data?.jobData;
-      setJobs(data);
-      // console.log(data);
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchData());
     }
-  };
-  fetchData();
-}, []);
-
-
+  }, [dispatch, status]);
 
   return (
     <>
-      <div className="main w-full   flex flex-col md:flex-row justify-evenly items-center bg-customGray gap-5 ">
-        <div className="right flex flex-col items-center gap-4 ">
+      <div className="main w-full flex flex-col md:flex-row justify-evenly items-center bg-customGray gap-5">
+        <div className="right flex flex-col items-center gap-4">
           <div>
-            <h1 className=" md:text-[2rem] text-[2rem] font-noto-sans lg:text-[2.5rem]">
+            <h1 className="md:text-[2rem] text-[2rem] font-noto-sans lg:text-[2.5rem]">
               Find a job that suits
             </h1>
-            <h1 className="md:text-[2rem] text-[2rem]  font-noto-sans  lg:text-[2.5rem]">
+            <h1 className="md:text-[2rem] text-[2rem] font-noto-sans lg:text-[2.5rem]">
               your interest & skills
             </h1>
           </div>
@@ -51,11 +46,11 @@ useEffect(() => {
             learn new things, and earn money on your own schedule. Join our
             community of motivated people and begin creating your future today
           </h1>
-          <button className="border-2  bg-customBlue text-white font-bold py-2 px-4 rounded">
+          <button className="border-2 bg-customBlue text-white font-bold py-2 px-4 rounded">
             Get Started
           </button>
         </div>
-        <div className="left ">
+        <div className="left">
           <img src={BoyPic} alt="" />
         </div>
       </div>
@@ -69,12 +64,12 @@ useEffect(() => {
       </div>
       {/* cards */}
 
-      {/* how to carrer work */}
+      {/* how to career work */}
       <HowToworks />
-      {/* how to carrer work */}
-      <div className="bg-customGray w-full h-auto flex items-center justify-center  p-4">
-        <div className=" grid lg:grid-cols-4 md:grid-cols-2 justify-center items-center gap-10">
-          <div className="card  relative w-60 h-52  flex  flex-col justify-center items-center rounded-md gap-4 ">
+      {/* how to career work */}
+      <div className="bg-customGray w-full h-auto flex items-center justify-center p-4">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 justify-center items-center gap-10">
+          <div className="card relative w-60 h-52 flex flex-col justify-center items-center rounded-md gap-4">
             <div className="bg-white rounded-[100%] flex justify-center items-center h-10 w-10">
               <FaRegUser className="text-customBlue" />
             </div>
@@ -87,7 +82,7 @@ useEffect(() => {
             />
           </div>
 
-          <div className="card relative w-60 h-52 bg-white flex  flex-col justify-center items-center rounded-md gap-4">
+          <div className="card relative w-60 h-52 bg-white flex flex-col justify-center items-center rounded-md gap-4">
             <div className="bg-customBlue rounded-[100%] flex justify-center items-center h-10 w-10">
               <IoCloudUploadOutline className="text-white" />
             </div>
@@ -100,7 +95,7 @@ useEffect(() => {
             />
           </div>
 
-          <div className="card  relative w-60 h-52  flex  flex-col justify-center items-center rounded-md  gap-4">
+          <div className="card relative w-60 h-52 flex flex-col justify-center items-center rounded-md gap-4">
             <div className="bg-white rounded-[100%] flex justify-center items-center h-10 w-10">
               <FaSearchPlus className="text-customBlue" />
             </div>
@@ -115,7 +110,7 @@ useEffect(() => {
             />
           </div>
 
-          <div className="card w-60 h-52 flex  flex-col justify-center items-center rounded-md gap-4">
+          <div className="card w-60 h-52 flex flex-col justify-center items-center rounded-md gap-4">
             <div className="bg-white rounded-[100%] flex justify-center items-center h-10 w-10">
               <MdOutlineVerified className="text-customBlue" />
             </div>
@@ -126,19 +121,22 @@ useEffect(() => {
       </div>
 
       {/* featured job */}
-      <div className=" h-auto w-[80%] mx-auto flex flex-col items-center justify-center">
+      <div className="h-auto w-[80%] mx-auto flex flex-col items-center justify-center">
         <div className="flex w-full my-10 h-auto justify-between items-center">
           <h1 className="text-[2rem] font-bold">Featured jobs</h1>
-          <button className="px-6 py-2  text-customBlue rounded-md hove border-2 :bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={()=>{navigate('/filterjob')}}>
+          <button
+            className="px-6 py-2 text-customBlue rounded-md border-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => navigate('/filterjob')}
+          >
             View All
           </button>
         </div>
-        <div className="flex  w-full flex-col gap-3">
-        {jobs.map((val) => (
-        <JobListing key={val._id} jobs={val}/> // Pass the job data as props if needed
-      ))}
-          
+        <div className="flex w-full flex-col gap-3">
+          {status === 'loading' && <p>Loading...</p>}
+          {status === 'failed' && <p>{error}</p>}
+          {status === 'succeeded' && jobs.map((val) => (
+            <JobListing key={val._id} jobs={val} />
+          ))}
         </div>
       </div>
     </>

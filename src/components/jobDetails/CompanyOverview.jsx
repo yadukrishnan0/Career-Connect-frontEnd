@@ -8,8 +8,8 @@ const CompanyOverview = ({jobdata}) => {
         <div className="flex items-center">
           <i className="fas fa-calendar-alt text-blue-500 mr-2"></i>
           <div>
-            <p className="font-bold">JOB EXIPIRY:</p>
-            <p>{jobdata.date}</p>
+            <p className="font-bold">Company Name</p>
+            <p>{jobdata.companyId. Companyname}</p>
           </div>
         </div>
 
@@ -18,8 +18,8 @@ const CompanyOverview = ({jobdata}) => {
         <div className="flex items-center">
           <i className="fas fa-user-graduate text-blue-500 mr-2"></i>
           <div>
-            <p className="font-bold">EDUCATION:</p>
-            <p>{jobdata.education}</p>
+            <p className="font-bold">Sector</p>
+            <p>{jobdata.companyDocuments.Sector}</p>
           </div>
         </div>
 
@@ -28,30 +28,30 @@ const CompanyOverview = ({jobdata}) => {
         <div className="flex items-center">
           <i className="fas fa-wallet text-blue-500 mr-2"></i>
           <div>
-            <p className="font-bold">SALARY:</p>
-            <p>{jobdata.maxsalary}-{jobdata.minisalary}/month</p>
+            <p className="font-bold">Phone</p>
+            <p className=''>{jobdata.companyId.phone}</p>
           </div>
         </div>
         <div className="flex items-center">
           <i className="fas fa-map-marker-alt text-blue-500 mr-2"></i>
           <div>
             <p className="font-bold">LOCATION:</p>
-            <p>{jobdata.companyDocuments.state}</p>
+            <p>{jobdata.companyDocuments.state},{jobdata.companyDocuments.district}</p>
           </div>
         </div>
         <div className="flex items-center">
           <i className="fas fa-briefcase text-blue-500 mr-2"></i>
           <div>
-            <p className="font-bold">JOB TYPE:</p>
-            <p>{jobdata.jobType}</p>
+            <p className="font-bold">Email:</p>
+            <p>{jobdata.companyId.email}</p>
           </div>
         </div>
         <div className="flex items-center">
           <i className="fas fa-briefcase text-blue-500 mr-2"></i>
-          <div>
+          {/* <div>
             <p className="font-bold">EXPERIENCE:</p>
             <p>{jobdata.experience}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
