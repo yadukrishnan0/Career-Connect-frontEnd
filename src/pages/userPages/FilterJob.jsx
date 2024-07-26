@@ -4,25 +4,24 @@ import JobListing from "../../components/JobListing/JobListing";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../instence/axiosinstance";
 import ScrollToTop from "../../utilities/ScrollToTop";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../Redux/Features/jobDataslice";
 function FilterJob() {
   ScrollToTop();
-  const [jobs, setJobs] = useState([]);
   const[filtermodal,setFiltermodal]=useState(false);
 
+
+  const dispatch = useDispatch();
+  const jobs = useSelector((state) => state.jobdata.Jobdata);
+  const status = useSelector((state) => state.jobdata.status);
+  const error = useSelector((state) => state.jobdata.error);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get("/");
-        const data = response?.data?.jobData;
-        setJobs(data);
-        // console.log(data);
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (status === 'idle') {
+      dispatch(fetchData());
+    }
+  }, [dispatch, status]);
+
 
 
   return (

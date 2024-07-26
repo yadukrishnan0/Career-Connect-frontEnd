@@ -26,7 +26,6 @@ const jobDataslice = createSlice({
       const searchTerm = action.payload.toLowerCase();
       state.Jobdata =state.filterJobDatas.filter(job =>
         job.jobTitle.toLowerCase().includes(searchTerm) 
-        // job.description.toLowerCase().includes(searchTerm)
       );
     },
   },

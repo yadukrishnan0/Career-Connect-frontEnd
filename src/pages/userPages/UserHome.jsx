@@ -19,7 +19,6 @@ function UserHome() {
   const navigate = useNavigate();
   
   const jobs = useSelector((state) => state.jobdata.Jobdata);
-  console.log( jobs)
   const status = useSelector((state) => state.jobdata.status);
   const error = useSelector((state) => state.jobdata.error);
 
