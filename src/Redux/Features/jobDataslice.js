@@ -12,6 +12,7 @@ export const fetchData = createAsyncThunk('jobdata/fetchData', async () => {
 
 const initialState = {
   Jobdata: [],
+  filterJobDatas:[],
   status: 'idle', 
   error: null,
 };
@@ -20,7 +21,15 @@ const initialState = {
 const jobDataslice = createSlice({
   name: 'jobdata',
   initialState,
-  reducers: {},
+  reducers: {
+    searchJob: (state, action) => {
+      const searchTerm = action.payload.toLowerCase();
+      state.Jobdata =state.filterJobDatas.filter(job =>
+        job.jobTitle.toLowerCase().includes(searchTerm) 
+        // job.description.toLowerCase().includes(searchTerm)
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -29,6 +38,7 @@ const jobDataslice = createSlice({
       .addCase(fetchData.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.Jobdata = action.payload;
+        state.filterJobDatas=action.payload;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.status = 'failed';
@@ -36,5 +46,5 @@ const jobDataslice = createSlice({
       });
   },
 });
-
+export const { searchJob } = jobDataslice.actions;
 export default jobDataslice.reducer;

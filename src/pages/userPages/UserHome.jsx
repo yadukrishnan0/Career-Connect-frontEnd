@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import BoyPic from "../../assets/Illustration.png";
-import Button from "../../components/shared/Button";
 import Cards from "../../components/Cards/Cards";
 import HowToworks from "../../components/how works/HowToworks";
 import { FaRegUser } from "react-icons/fa6";
@@ -14,11 +13,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../Redux/Features/jobDataslice";
 
+
 function UserHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
   const jobs = useSelector((state) => state.jobdata.Jobdata);
+  console.log( jobs)
   const status = useSelector((state) => state.jobdata.status);
   const error = useSelector((state) => state.jobdata.error);
 
