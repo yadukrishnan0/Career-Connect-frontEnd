@@ -32,10 +32,10 @@ function FilterJob() {
           <JobListing key={val._id} jobs={val} /> // Pass the job data as props if needed
         ))}
       </div>
+      
+  
+  {/* <FilterComponent /> */}
 
-  <div className={filtermodal ? 'flex' : 'hidden'}>
-  <FilterComponent />
-</div>
 
 </div>
 

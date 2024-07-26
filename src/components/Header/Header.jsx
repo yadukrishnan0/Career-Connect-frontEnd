@@ -23,7 +23,7 @@ function Header() {
   const debouncedSearch = useCallback(
     debounce((searchTerm) => {
       dispatch(searchJob(searchTerm));
-    }, 300),
+    }, 700),
     [dispatch]
   );
 
@@ -65,6 +65,7 @@ function Header() {
       </div>
 
       <div className="flex justify-around p-2 border-b-2">
+        <p></p>
         <div className="flex border border-gray-300 rounded-lg shadow-sm p-2 md:w-1/4">
           <input
             type="text"
