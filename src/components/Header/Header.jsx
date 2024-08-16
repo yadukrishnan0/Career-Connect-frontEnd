@@ -5,19 +5,23 @@ import { CiMenuBurger } from "react-icons/ci";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData, searchJob } from "../../Redux/Features/jobDataslice";
 
 function Header() {
-  const [searchInput, setSearchInput] = useState('');
- 
+  const [searchInput, setSearchInput] = useState("");
+  const [signup, setSignup] = useState();
   const status = useSelector((state) => state.jobdata.status);
-
- 
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("user");
+    token ? setSignup(true) : setSignup(false);
+  }, []);
+
+ 
 
   // Initialize debounce with a delay of 300ms
   const debouncedSearch = useCallback(
@@ -31,6 +35,12 @@ function Header() {
     const { value } = event.target;
     setSearchInput(value);
     debouncedSearch(value);
+    navigate("/filterjob");
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
   };
 
   return (
@@ -40,24 +50,32 @@ function Header() {
           <h1 className="font-medium text-[1.1rem]">Career-Connect</h1>
         </div>
         <div className="sm:flex gap-14 hidden">
-          <Link to='/'>
+          <Link to="/">
             <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue">
               Home
             </h1>
           </Link>
-          <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue">
+          <h1
+            className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue cursor-pointer"
+            onClick={() => {
+              navigate("/filterjob");
+            }}
+          >
             Jobs
           </h1>
-          <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue">
+          <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue cursor-pointer">
             My Jobs
           </h1>
-          <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue">
+          <h1 className="hover:border-b-customBlue hover:border-b-2 hover:text-customBlue cursor-pointer">
             Customer Support
           </h1>
         </div>
 
         <div className="hidden sm:flex">
-          <Button label="Sign in" />
+          <Button
+            label={`${signup ? "Logout" : "Signup"} `}
+            handleClick={logout}
+          />
         </div>
         <div className="flex sm:hidden">
           <CiMenuBurger />
@@ -82,7 +100,9 @@ function Header() {
         <div className="sm:flex hidden items-center justify-center gap-3">
           <IoNotificationsOutline />
           <FaRegUser
-            onClick={() => { navigate('/profile'); }}
+            onClick={() => {
+              navigate("/profile");
+            }}
             className="cursor-pointer"
           />
         </div>

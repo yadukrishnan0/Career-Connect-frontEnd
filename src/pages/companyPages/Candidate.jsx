@@ -12,6 +12,7 @@ const Candidate = () => {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get(`/company/viewCandidates?jobId=${jobId}`);
+        console.log(response)
         if (response.status === 200) {
           const data = response.data.CanditesData.applications;
           setCanditesData(data);

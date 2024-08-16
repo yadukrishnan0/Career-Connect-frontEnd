@@ -34,7 +34,8 @@ function ComplteProfile() {
       try {
         const response = await axiosInstance.get("/profile");
         if (response.status == 200) {
-          const user = response?.data?.exisitUser;
+          console.log(response)
+          const user = response?.data?.existUser;
           const userprofile = response?.data?.profiledata;
           setInitialValues({ ...initialValues, name: user.name });
           setProfileData(userprofile);
