@@ -146,7 +146,7 @@ const ApplicationForm = ({ initialValues, onSubmit }) => {
               className="w-full bg-blue-500 text-white py-2 rounded-md"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Posting...' : 'Post Job'}
+              {isSubmitting ? 'submiting...' : 'Submit'}
             </button>
           </Form>
         </div>

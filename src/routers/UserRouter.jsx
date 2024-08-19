@@ -13,7 +13,7 @@ import ComplteProfile from "../pages/userPages/ComplteProfile";
 import PrivateRoute from "./PrivateRoute";
 import ApplicationPage from "../pages/userPages/ApplicationPage";
 import Completejobapplication from "../pages/userPages/Completejobapplication";
-import Chat from "../pages/userPages/Chat";
+// import Chat from "../pages/userPages/Chat";
 
 const UserRouter = () => {
   return (
@@ -55,7 +55,7 @@ const UserRouter = () => {
           }
         />
 
-        <Route path="/chat" element={<Chat />} /> 
+        {/* <Route path="/chat" element={<Chat />} />  */}
        
       </Route>
     </Routes>
