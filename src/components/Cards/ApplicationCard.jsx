@@ -9,7 +9,7 @@ const ApplicationCard = ({ applicant }) => {
   const downloadCV = async () => {
     try {
       const response = await axiosInstance.get(`/assets/${resume}`, {
-        responseType: 'blob', // Ensure the response is of type blob
+        responseType: "blob", // Ensure the response is of type blob
       });
 
       const url = window.URL.createObjectURL(new Blob([response.data]));

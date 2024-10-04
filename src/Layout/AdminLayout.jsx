@@ -8,7 +8,6 @@ function AdminLayout() {
     <div className='flex h-screen w-full'>
     <Sidebar/>
     <div className='h-auto flex-1 p-5 overflow-y-auto'>
-
     <Outlet />
     </div>
     </div>
